@@ -1,6 +1,7 @@
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Header from "../components/Header/Header";
 import Image from "next/image";
+import ConnectWalletBtn from "@/components/ConnectWalletBtn/ConnectWalletBtn";
 
 /**
  * Home component representing the landing page of FlowScan.
@@ -29,12 +30,7 @@ export default function Home() {
                 about the latest activities on the network.
               </p>
               <div className="flex justify-end">
-                <a
-                  href="#"
-                  className=" text-white border-purple-500  bg-purple-600 hover:bg-purple-700 shadow font-bold py-2 px-4 rounded w-fit"
-                >
-                  Connect Wallet
-                </a>
+                <ConnectWalletBtn />
               </div>
             </div>
           </div>

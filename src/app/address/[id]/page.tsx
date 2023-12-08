@@ -12,13 +12,17 @@ import { useEffect, useState } from "react";
  * @component
  * @returns A component representing the address details
  */
-const AddressDetails = () => {
+const AddressDetails = ({ id }: { id?: string }) => {
   const params = useParams();
   const [addressBalance, setAddressBalance] = useState<AddressBalance | null>(
     null
   );
   const [index, setIndex] = useState(0);
-  const addresssId = typeof params.id === "string" ? params.id : params.id[0];
+  const addresssId = id
+    ? id
+    : typeof params.id === "string"
+    ? params.id
+    : params.id[0];
 
   useEffect(() => {
     async function getDetails() {

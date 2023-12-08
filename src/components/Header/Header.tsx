@@ -1,3 +1,4 @@
+import ConnectWalletBtn from "../ConnectWalletBtn/ConnectWalletBtn";
 import PriceDisplay from "../PriceDisplay/PriceDisplay";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -19,12 +20,13 @@ const Header = () => {
         <div>
           <p className="text-2xl font-semibold">FlowScan</p>
         </div>
-        <a
+        <ConnectWalletBtn />
+        {/* <a
           href="#"
           className="border-purple-400 hover:bg-gray-100 shadow font-bold py-2 px-4 rounded"
         >
           Connect Wallet
-        </a>
+        </a> */}
       </div>
     </header>
   );
