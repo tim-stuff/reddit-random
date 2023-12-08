@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatUnixTime } from "../HelperFunctions/HelperFunctions";
 
 type EtherPrice = {
   ethusd: number;
@@ -25,7 +26,7 @@ export default async function getEtherLastPrice(): Promise<EtherPrice | null> {
 
       return {
         ethusd: parseFloat(Number(ethusd).toFixed(2)),
-        updatedAt: ethusd_timestamp,
+        updatedAt: formatUnixTime(ethusd_timestamp),
       };
     } else {
       console.error("Error fetching data:", response.data.message);

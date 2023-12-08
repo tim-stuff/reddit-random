@@ -11,11 +11,15 @@ import {
   useEnsName,
 } from "wagmi";
 
+type Props = {
+  className?: string;
+};
+
 /**
  * Renders a custom button with wagmi hooks to connect/disconnect to wallets
  * @returns A connect or disconnect button depending on the connected state.
  */
-const ConnectWalletBtn = () => {
+const ConnectWalletBtn = ({ className }: Props) => {
   const { open } = useWeb3Modal();
   const { address, connector, isConnected } = useAccount();
   const router = useRouter();
@@ -30,10 +34,7 @@ const ConnectWalletBtn = () => {
       {isConnected ? (
         <button onClick={() => disconnect()}>Disconnect</button>
       ) : (
-        <button
-          onClick={() => open()}
-          className=" text-white border-purple-500  bg-purple-600 hover:bg-purple-700 shadow font-bold py-2 px-4 rounded w-fit"
-        >
+        <button onClick={() => open()} className={` ${className}`}>
           Connect Wallet
         </button>
       )}

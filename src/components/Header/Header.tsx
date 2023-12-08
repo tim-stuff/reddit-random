@@ -9,24 +9,18 @@ import SearchBar from "../SearchBar/SearchBar";
  */
 const Header = () => {
   return (
-    <header className="  px-4 md:px-20 py-4 flex-row justify-between items-center bg-slate-100 mb-5">
+    <header className="  px-4 md:px-20 pt-4 pb-2 flex-row justify-between items-center  mb-5 border border-b-purple-200">
       <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center sm:place-items-stretch border-b min-h-50">
         <PriceDisplay />
 
         <SearchBar header={true} />
       </div>
 
-      <div className=" p-2 flex justify-between items-center">
+      <div className="  p-2  flex justify-between items-center">
         <div>
-          <p className="text-2xl font-semibold">FlowScan</p>
+          <p className="text-2xl tracking-widest font-bold ">FlowScan</p>
         </div>
-        <ConnectWalletBtn />
-        {/* <a
-          href="#"
-          className="border-purple-400 hover:bg-gray-100 shadow font-bold py-2 px-4 rounded"
-        >
-          Connect Wallet
-        </a> */}
+        <ConnectWalletBtn className="border-purple-400 hover:bg-gray-100 shadow font-bold py-2 px-4 rounded hidden md:inline-block" />
       </div>
     </header>
   );

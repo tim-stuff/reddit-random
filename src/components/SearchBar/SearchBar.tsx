@@ -51,11 +51,13 @@ const SearchBar = ({ header = false }: Props) => {
       >
         Search
       </label>
-      <div className="flex gap-2 border-2 p-2 rounded-md">
+      <div
+        className={`${header && "border-0"} flex gap-2 border-2 p-2 rounded-md`}
+      >
         <input
           type="search"
           id="default-search"
-          className=" p-2  text-sm text-gray-900 rounded-lg focus:outline-none focus:border-2-purple w-full "
+          className="p-2  text-sm text-gray-900 rounded-lg focus:outline-none focus:border-2-purple w-full"
           placeholder="Search for a particular address, transaction hash or token"
           value={searchInput}
           onChange={handleInputChange}

@@ -12,31 +12,49 @@ const PriceDisplay = async () => {
     getEtherLastPrice(),
     getGasPrice(),
   ]);
-  return (
-    <div className="flex space-x-4 ">
-      {ethPrice && (
-        <div className="flex">
-          <p className="text-sm text-gray-600">Eth Price: </p>
-          <p className="text-purple-600 hover:text-purple-700 cursor-pointer">
-            {ethPrice.ethusd}
-          </p>
+
+  const PriceComponent = ({
+    text,
+    subText,
+    hoverText,
+  }: {
+    text: string;
+    subText: string;
+    hoverText: string;
+  }) => {
+    return (
+      <div className="flex gap-1 align-middle">
+        <p className="text-sm text-gray-600 self-center">{text} </p>
+        <div className="group flex relative align-middle ">
+          <span className=" text-purple-600 hover:text-purple-700 cursor-pointer text-sm self-center">
+            {subText}
+          </span>
+          <span
+            className="group-hover:block  transition-opacity bg-purple-600 text-sm text-gray-100 rounded-md absolute left-1/2 
+    -translate-x-1/2 translate-y-8 hidden w-max mx-auto p-2"
+          >
+            {hoverText}
+          </span>
         </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="flex space-x-4 pb-4 align-middle ">
+      {ethPrice && (
+        <PriceComponent
+          text="ETH Price: "
+          subText={`$${ethPrice.ethusd}`}
+          hoverText={`Last updated: ${ethPrice.updatedAt}`}
+        />
       )}
       {gasPrice && (
-        <div className="flex">
-          <p className="text-sm text-gray-600">Gas: </p>
-          <div className="group flex relative">
-            <span className=" text-purple-600 hover:text-purple-700 cursor-pointer text-sm">
-              {gasPrice.currentPrice} GWEI
-            </span>
-            <span
-              className="group-hover:block  transition-opacity bg-gray-600 text-sm text-gray-100 rounded-md absolute left-1/2 
-    -translate-x-1/2 translate-y-1/2 hidden w-40 mx-auto p-2"
-            >
-              {`Base Fee: ${gasPrice.basePrice} GWEI`}
-            </span>
-          </div>
-        </div>
+        <PriceComponent
+          text="Gas:  "
+          subText={`${gasPrice.currentPrice} GWEI`}
+          hoverText={`Base Fee: ${gasPrice.basePrice} GWEI`}
+        />
       )}
     </div>
   );

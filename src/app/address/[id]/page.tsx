@@ -8,6 +8,7 @@ import { getAddressBalance } from "@/utils/services/getAddressDetails";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NormalTransaction, TokenTransfer } from "@/types/sharedTypes";
+import CopyBtn from "@/components/CopyBtn/CopyBtn";
 
 /**
  * Renders the address details including address balance, token transfers, and normal transactions.
@@ -38,33 +39,44 @@ const AddressDetails = ({ id }: { id?: string }) => {
 
   return (
     <>
-      <div className="p-4 border rounded-md shadow-md">
-        <h2 className="text-lg font-semibold mb-2">Address Details</h2>
+      <div className="p-4 border rounded-md shadow-md w-fit">
+        <h2 className="text-lg font-semibold mb-2 ">Address Details</h2>
 
-        <p>
-          {` Address : ${addressId} wei`}
-          <span
-            className=" cursor-pointer text-xs border-purple-200 border p-2 "
-            onClick={() => {
-              navigator.clipboard.writeText(addressId);
-            }}
-          ></span>
-        </p>
+        <div className="flex gap-4 ">
+          <p className=" whitespace-normal break-all ">
+            {` Address : ${addressId} wei `}
+          </p>
+          <CopyBtn hashId={addressId} />
+        </div>
         {addressBalance && (
           <div>{` Current address balance : ${addressBalance} wei`}</div>
         )}
       </div>
       <div>
-        <div className="flex gap-5">
-          <button onClick={() => setIndex(0)}>Token Transfers</button>
-          <button onClick={() => setIndex(1)}>Normal Transactions</button>
+        <div className="flex border-b py-4">
+          <button
+            onClick={() => setIndex(0)}
+            className={`bg-white inline-blockrounded-t py-2 px-4 text-blue-700 font-semibold ${
+              index === 0 && " border-t border-r border-l"
+            }`}
+          >
+            Normal Transactions
+          </button>
+          <button
+            onClick={() => setIndex(1)}
+            className={`bg-white inline-blockrounded-t py-2 px-4 text-blue-700 font-semibold ${
+              index !== 0 && " border-t border-r border-l"
+            }`}
+          >
+            Token Transfers
+          </button>
         </div>
         {index === 0 ? (
-          <Pagination addressId={addressId}>{AddressTokenTransfers}</Pagination>
-        ) : (
           <Pagination addressId={addressId}>
             {AddressNormalTransaction}
           </Pagination>
+        ) : (
+          <Pagination addressId={addressId}>{AddressTokenTransfers}</Pagination>
         )}
       </div>
     </>

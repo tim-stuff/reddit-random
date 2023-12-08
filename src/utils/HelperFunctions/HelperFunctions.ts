@@ -7,8 +7,6 @@
 export function formatUnixTime(unixTimestamp: number): string {
   const date = new Date(unixTimestamp * 1000);
   const options: Intl.DateTimeFormatOptions = {
-    month: "numeric",
-    day: "numeric",
     hour: "numeric",
     minute: "numeric",
   };
