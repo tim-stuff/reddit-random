@@ -1,42 +1,51 @@
 import { TokenTransfer } from "@/types/sharedTypes";
 import { getTokenTransfers } from "@/utils/services/getAddressDetails";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
   addressId: string;
+  data: TokenTransfer[];
+  pageNumber: number;
+
+  setData: Dispatch<SetStateAction<TokenTransfer[]>>;
 };
 
 /**
- * Renders list of erc-20 token transfers
+ * Renders list of erc-20 token transactions
+ *
  * @component
  * @param addressId - A string representing the given addressId
- * @returns A component for the  address token transfers.
+ * @param pageNumber - The current page number
+ * @param data - An array of data to be rendered
+ * @param setData -Function to update the state with new data
+ * @returns A component for the list of erc-20 token transactions.
  */
-const AddressTokenTransfers = ({ addressId }: Props) => {
-  const [tokenTransfer, setTokenTransfer] = useState<TokenTransfer[]>([]);
-  const [pageNumber, setPageNumber] = useState(1);
-
+const AddressTokenTransfers = ({
+  addressId,
+  data,
+  setData,
+  pageNumber,
+}: Props) => {
   useEffect(() => {
-    if (pageNumber < tokenTransfer.length / 20) {
+    if (pageNumber < data.length / 20) {
       return;
     }
     async function getDetails() {
-      const startBlock =
-        tokenTransfer && tokenTransfer.length ? tokenTransfer.length : 0;
+      const startBlock = data && data.length ? data.length : 0;
       const details = await getTokenTransfers(
         addressId,
         pageNumber,
         startBlock
       );
       if (details)
-        setTokenTransfer((prev) => {
+        setData((prev) => {
           return [...prev, ...details];
         });
     }
     getDetails();
   }, [pageNumber, addressId]);
 
-  if (!tokenTransfer) return null;
+  if (!data) return null;
 
   return (
     <div className="overflow-x-auto">
@@ -52,7 +61,7 @@ const AddressTokenTransfers = ({ addressId }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {tokenTransfer
+          {data
             .slice((pageNumber - 1) * 20, (pageNumber - 1) * 20 + 20)
             .map((transaction, index) => (
               <tr key={index}>
@@ -66,30 +75,6 @@ const AddressTokenTransfers = ({ addressId }: Props) => {
             ))}
         </tbody>
       </table>
-      <div className="flex gap-4 m-10">
-        <p>{`Current Page ${pageNumber}`}</p>
-        <button
-          className="border border-purple-500 text-purple-500 px-4 py-2 rounded focus:outline-none"
-          onClick={() => setPageNumber((prev) => prev - 1)}
-          disabled={pageNumber === 1}
-        >
-          Previous
-        </button>
-        <button
-          className="bg-purple-500 text-white px-4 py-2 rounded focus:outline-none"
-          onClick={() => setPageNumber((prev) => prev + 1)}
-          disabled={
-            tokenTransfer.slice(
-              (pageNumber - 1) * 20,
-              (pageNumber - 1) * 20 + 20
-            ).length < 20
-              ? true
-              : false
-          }
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };

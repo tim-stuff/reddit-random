@@ -2,10 +2,12 @@
 
 import AddressNormalTransaction from "@/components/AddressNormalTransactions/AddressNormalTransactions";
 import AddressTokenTransfers from "@/components/AddressTokenTransfers/AddressTokenTransfers";
+import Pagination from "@/components/Pagination/Pagination";
 import { AddressBalance } from "@/types/sharedTypes";
 import { getAddressBalance } from "@/utils/services/getAddressDetails";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { NormalTransaction, TokenTransfer } from "@/types/sharedTypes";
 
 /**
  * Renders the address details including address balance, token transfers, and normal transactions.
@@ -13,12 +15,14 @@ import { useEffect, useState } from "react";
  * @returns A component representing the address details
  */
 const AddressDetails = ({ id }: { id?: string }) => {
+  const [data, setData] = useState<NormalTransaction[] | TokenTransfer[]>([]);
+  const [pageNumber, setPageNumber] = useState(1);
   const params = useParams();
   const [addressBalance, setAddressBalance] = useState<AddressBalance | null>(
     null
   );
   const [index, setIndex] = useState(0);
-  const addresssId = id
+  const addressId = id
     ? id
     : typeof params.id === "string"
     ? params.id
@@ -26,7 +30,7 @@ const AddressDetails = ({ id }: { id?: string }) => {
 
   useEffect(() => {
     async function getDetails() {
-      const details = await getAddressBalance(addresssId);
+      const details = await getAddressBalance(addressId);
       if (details) setAddressBalance(details);
     }
     getDetails();
@@ -38,11 +42,11 @@ const AddressDetails = ({ id }: { id?: string }) => {
         <h2 className="text-lg font-semibold mb-2">Address Details</h2>
 
         <p>
-          {` Address : ${addresssId} wei`}
+          {` Address : ${addressId} wei`}
           <span
             className=" cursor-pointer text-xs border-purple-200 border p-2 "
             onClick={() => {
-              navigator.clipboard.writeText(addresssId);
+              navigator.clipboard.writeText(addressId);
             }}
           ></span>
         </p>
@@ -56,9 +60,11 @@ const AddressDetails = ({ id }: { id?: string }) => {
           <button onClick={() => setIndex(1)}>Normal Transactions</button>
         </div>
         {index === 0 ? (
-          <AddressTokenTransfers addressId={addresssId} />
+          <Pagination addressId={addressId}>{AddressTokenTransfers}</Pagination>
         ) : (
-          <AddressNormalTransaction addressId={addresssId} />
+          <Pagination addressId={addressId}>
+            {AddressNormalTransaction}
+          </Pagination>
         )}
       </div>
     </>
