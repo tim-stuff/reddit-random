@@ -12,7 +12,7 @@ type Props = {
 /**
  * Renders a search bar which redirects to the relevant page depending on the input type
  * Accepts addresses, transaction hash & tokens
- *
+ * @component
  * @param props - The searchbar props
  * @param props.header - a boolean for whether the component is mounted on the header
  * @returns The search bar

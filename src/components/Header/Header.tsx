@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 /**
  * Renders a header component with navigation, branding, and wallet connection as a server component.
- *
+ * @component
  * @returns The header component.
  */
 const Header = () => {

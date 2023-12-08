@@ -7,7 +7,8 @@ type GasPrice = {
 
 /**
  * Fetches the latest gas price.
- * @returns The fast gas price and suggest base fee
+ * @returns  A Promise that resolves to the gas price  or null if an error occurs.
+
  */
 export default async function getGasPrice(): Promise<null | GasPrice> {
   try {

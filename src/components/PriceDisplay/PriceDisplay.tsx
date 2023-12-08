@@ -4,7 +4,7 @@ import getGasPrice from "@/utils/services/getGasPrice";
 /**
  * Renders the latest ether and gas price as a server component
  * This component uses server functions to prefetch the prices.
- *
+ * @component
  * @returns The price display component.
  */
 const PriceDisplay = async () => {

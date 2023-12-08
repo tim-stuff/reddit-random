@@ -7,7 +7,7 @@ type EtherPrice = {
 
 /**
  * Fetches the latest ether price
- * @returns The ether price in usd and formatted time.
+ * @returns  A Promise that resolves to the ether price and formatted time or null if an error occurs.
  */
 
 export default async function getEtherLastPrice(): Promise<EtherPrice | null> {
