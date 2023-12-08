@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header/Header";
 import { Web3Modal } from "../context/Web3Modal";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <Web3Modal>
           <Header />
           {children}
+          <Footer />
         </Web3Modal>
       </body>
     </html>
