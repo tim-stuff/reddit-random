@@ -26,27 +26,29 @@ const Pagination = ({ children, addressId }: Props) => {
         setData={setData}
         pageNumber={pageNumber}
       />
-      <div className="flex gap-4 m-10">
-        <p>{`Current Page ${pageNumber}`}</p>
-        <button
-          className="border border-purple-500 text-purple-500 px-4 py-2 rounded focus:outline-none"
-          onClick={() => setPageNumber((prev) => prev - 1)}
-          disabled={pageNumber === 1}
-        >
-          Previous
-        </button>
-        <button
-          className="bg-purple-500 text-white px-4 py-2 rounded focus:outline-none"
-          onClick={() => setPageNumber((prev) => prev + 1)}
-          disabled={
-            data.slice((pageNumber - 1) * 20, (pageNumber - 1) * 20 + 20)
-              .length < 20
-              ? true
-              : false
-          }
-        >
-          Next
-        </button>
+      <div className="flex flex-col align-middle justify-center w-full m-5">
+        <div className="flex gap-4 m-4 justify-center">
+          <button
+            className="border border-purple-500 text-purple-500 px-4 py-2 rounded focus:outline-none"
+            onClick={() => setPageNumber((prev) => prev - 1)}
+            disabled={pageNumber === 1}
+          >
+            Previous
+          </button>
+          <button
+            className="bg-purple-500 text-white px-4 py-2 rounded focus:outline-none"
+            onClick={() => setPageNumber((prev) => prev + 1)}
+            disabled={
+              data.slice((pageNumber - 1) * 20, (pageNumber - 1) * 20 + 20)
+                .length < 20
+                ? true
+                : false
+            }
+          >
+            Next
+          </button>
+        </div>
+        <p className=" text-md text-center">{`Page:  ${pageNumber}`}</p>
       </div>
     </>
   );

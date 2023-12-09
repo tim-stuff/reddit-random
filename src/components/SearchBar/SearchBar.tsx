@@ -52,7 +52,9 @@ const SearchBar = ({ header = false }: Props) => {
         Search
       </label>
       <div
-        className={`${header && "border-0"} flex gap-2 border-2 p-2 rounded-md`}
+        className={`${
+          header && "border-0 py-1"
+        } flex gap-2 border-2 p-2 rounded-md`}
       >
         <input
           type="search"

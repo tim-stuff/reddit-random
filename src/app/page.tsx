@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <main className=" px-4 md:px-24">
         <SearchBar />
-        <div className="mt-2 flex flex-col xl:flex-row  align-start gap-16 justify-center py-8 ">
+        <div className="mt-2 flex flex-col lg:flex-row  align-start gap-16 justify-center py-8 ">
           <div className="text-center py-4">
             <h2 className="text-4xl font-bold mb-4 text-left">
               Get Started with{" "}
@@ -40,7 +40,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="self-center xs:inline-block sm:hidden xl:inline-block">
+          <div className="self-center ">
             <Image
               src="/to-the-moon.svg"
               width={"500"}

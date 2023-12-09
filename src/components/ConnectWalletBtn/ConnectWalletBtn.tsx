@@ -32,7 +32,9 @@ const ConnectWalletBtn = ({ className }: Props) => {
   return (
     <>
       {isConnected ? (
-        <button onClick={() => disconnect()}>Disconnect</button>
+        <button className={` ${className}`} onClick={() => disconnect()}>
+          Disconnect
+        </button>
       ) : (
         <button onClick={() => open()} className={` ${className}`}>
           Connect Wallet

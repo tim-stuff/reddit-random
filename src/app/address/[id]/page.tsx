@@ -44,7 +44,7 @@ const AddressDetails = ({ id }: { id?: string }) => {
 
         <div className="flex gap-4 ">
           <p className=" whitespace-normal break-all ">
-            {` Address : ${addressId} wei `}
+            {` Address : ${addressId} `}
           </p>
           <CopyBtn hashId={addressId} />
         </div>
@@ -53,20 +53,20 @@ const AddressDetails = ({ id }: { id?: string }) => {
         )}
       </div>
       <div>
-        <div className="flex border-b py-4">
+        <div className="flex border-b py-4 text-blue-500">
           <button
             onClick={() => setIndex(0)}
-            className={`bg-white inline-blockrounded-t py-2 px-4 text-blue-700 font-semibold ${
-              index === 0 && " border-t border-r border-l"
-            }`}
+            className={`bg-white inline-blockrounded-t py-2 px-4  font-semibold ${
+              index === 0 && " border-t border-r border-l text-blue-700 "
+            } `}
           >
             Normal Transactions
           </button>
           <button
             onClick={() => setIndex(1)}
-            className={`bg-white inline-blockrounded-t py-2 px-4 text-blue-700 font-semibold ${
-              index !== 0 && " border-t border-r border-l"
-            }`}
+            className={`bg-white inline-blockrounded-t py-2 px-4  font-semibold ${
+              index !== 0 && " border-t border-r border-l text-blue-700"
+            } `}
           >
             Token Transfers
           </button>

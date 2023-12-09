@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ConnectWalletBtn from "../ConnectWalletBtn/ConnectWalletBtn";
 import PriceDisplay from "../PriceDisplay/PriceDisplay";
 import SearchBar from "../SearchBar/SearchBar";
@@ -18,7 +19,9 @@ const Header = () => {
 
       <div className="  p-2  flex justify-between items-center">
         <div>
-          <p className="text-2xl tracking-widest font-bold ">FlowScan</p>
+          <Link href="/" className="text-2xl tracking-widest font-bold ">
+            FlowScan
+          </Link>
         </div>
         <ConnectWalletBtn className="border-purple-400 hover:bg-gray-100 shadow font-bold py-2 px-4 rounded hidden md:inline-block" />
       </div>
