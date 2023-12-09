@@ -1,13 +1,14 @@
-import { TokenTransfer } from "@/types/sharedTypes";
+import { Transaction } from "@/types/sharedTypes";
 import { getTokenTransfers } from "@/utils/services/getAddressDetails";
+import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import TransactionTable from "../TransactionTable/TansactionTable";
 
 type Props = {
   addressId: string;
-  data: TokenTransfer[];
+  data: Transaction[];
   pageNumber: number;
-
-  setData: Dispatch<SetStateAction<TokenTransfer[]>>;
+  setData: Dispatch<SetStateAction<Transaction[]>>;
 };
 
 /**
@@ -48,36 +49,7 @@ const AddressTokenTransfers = ({
 
   if (!data) return null;
 
-  return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full border border-collapse text-sm">
-        <thead>
-          <tr>
-            <th className="border p-2">Transaction Hash</th>
-            <th className="border p-2">To</th>
-            <th className="border p-2">Value</th>
-            <th className="border p-2">Timestamp</th>
-            <th className="border p-2">From</th>
-            <th className="border p-2">Function Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data
-            .slice((pageNumber - 1) * 20, (pageNumber - 1) * 20 + 20)
-            .map((transaction, index) => (
-              <tr key={index}>
-                <td className="border p-2">{transaction.hash}</td>
-                <td className="border p-2">{transaction.to}</td>
-                <td className="border p-2">{transaction.value}</td>
-                <td className="border p-2">{transaction.timeStamp}</td>
-                <td className="border p-2">{transaction.from}</td>
-                <td className="border p-2">{transaction.method}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  return <TransactionTable data={data} pageNumber={pageNumber} />;
 };
 
 export default AddressTokenTransfers;

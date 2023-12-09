@@ -6,6 +6,7 @@ import {
   TokenTransfer,
 } from "@/types/sharedTypes";
 import axios from "axios";
+import { getTimeAgo } from "../HelperFunctions/HelperFunctions";
 
 /**
  * Retrieves the balance of an Ethereum address.
@@ -71,13 +72,14 @@ export async function getNormalTransactions(
 
     if (response.data.status === "1") {
       const { result } = response.data;
+      console.log("🚀 ~ file: getAddressDetails.ts:74 ~ result:", result);
       const mappedResult = result.map((transaction: NormalTransaction) => ({
-        transactionHash: transaction.hash,
+        hash: transaction.hash,
         to: transaction.to,
         value: transaction.value,
-        timeStamp: transaction.timeStamp,
+        timeStamp: getTimeAgo(transaction.timeStamp),
         from: transaction.from,
-        functionName: transaction.functionName,
+        method: transaction.functionName,
       }));
 
       return mappedResult;
@@ -122,10 +124,10 @@ export async function getTokenTransfers(
     if (response.data.status === "1") {
       const { result } = response.data;
       const mappedResult = result.map((transaction: TokenTransfer) => ({
-        transactionHash: transaction.hash,
+        hash: transaction.hash,
         to: transaction.to,
         value: transaction.value,
-        timeStamp: transaction.timeStamp,
+        timeStamp: getTimeAgo(transaction.timeStamp),
         from: transaction.from,
         functionName: transaction.method,
       }));

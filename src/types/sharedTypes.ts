@@ -6,20 +6,11 @@ export type HashDetails = {
 
 export type AddressBalance = string;
 
-export type NormalTransaction = {
+export type Transaction = {
   hash: string;
   to: string;
   value: string;
   timeStamp: string;
   from: string;
-  functionName: string;
-};
-
-export type TokenTransfer = {
-  hash: string;
-  timeStamp: string;
-  from: string;
-  to: string;
-  value: string;
   method: string;
 };
