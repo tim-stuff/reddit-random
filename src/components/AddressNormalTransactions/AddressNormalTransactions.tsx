@@ -1,6 +1,6 @@
 import { NormalTransaction, TokenTransfer } from "@/types/sharedTypes";
 import { getNormalTransactions } from "@/utils/services/getAddressDetails";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 type Props = {
   addressId: string;
@@ -25,20 +25,27 @@ const AddressNormalTransaction = ({
   setData,
   pageNumber,
 }: Props) => {
+  const firstRender = useRef(true);
+
+  async function getDetails() {
+    const startBlock = data && data.length ? data.length : 0;
+
+    const details = await getNormalTransactions(
+      addressId,
+      pageNumber,
+      startBlock
+    );
+
+    if (details) setData((prev) => [...prev, ...details]);
+  }
+
   useEffect(() => {
-    if (pageNumber < data.length / 20) {
-      return;
+    if (firstRender.current) {
+      firstRender.current = false;
+      getDetails();
+    } else if (data.length && pageNumber > data.length / 20) {
+      getDetails();
     }
-    async function getDetails() {
-      const startBlock = data && data.length ? data.length : 0;
-      const details = await getNormalTransactions(
-        addressId,
-        pageNumber,
-        startBlock
-      );
-      if (details) setData((prev) => [...prev, ...details]);
-    }
-    getDetails();
   }, [pageNumber, addressId]);
 
   if (!data) return null;

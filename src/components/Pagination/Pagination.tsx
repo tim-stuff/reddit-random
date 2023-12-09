@@ -20,6 +20,7 @@ const Pagination = ({ children, addressId }: Props) => {
   return (
     <>
       <ChildComponent
+        key={JSON.stringify(children)}
         addressId={addressId}
         data={data}
         setData={setData}

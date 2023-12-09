@@ -7,7 +7,6 @@ import { arbitrum, mainnet } from "viem/chains";
 import { ReactElement } from "react";
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "";
-console.log("🚀 ~ file: Web3Modal.tsx:11 ~ projectId:", projectId);
 
 const metadata = {
   name: "Stable-assignment",

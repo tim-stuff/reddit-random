@@ -72,11 +72,13 @@ const AddressDetails = ({ id }: { id?: string }) => {
           </button>
         </div>
         {index === 0 ? (
-          <Pagination addressId={addressId}>
+          <Pagination key="normal" addressId={addressId}>
             {AddressNormalTransaction}
           </Pagination>
         ) : (
-          <Pagination addressId={addressId}>{AddressTokenTransfers}</Pagination>
+          <Pagination key="token" addressId={addressId}>
+            {AddressTokenTransfers}
+          </Pagination>
         )}
       </div>
     </>
