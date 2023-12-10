@@ -2,6 +2,7 @@ import Link from "next/link";
 import ConnectWalletBtn from "../ConnectWalletBtn/ConnectWalletBtn";
 import PriceDisplay from "../PriceDisplay/PriceDisplay";
 import SearchBar from "../SearchBar/SearchBar";
+import Image from "next/image";
 
 /**
  * Renders a header component with navigation, branding, and wallet connection as a server component.
@@ -19,7 +20,16 @@ const Header = () => {
 
       <div className="  p-2  flex justify-between items-center">
         <div>
-          <Link href="/" className="text-2xl tracking-widest font-bold ">
+          <Link
+            href="/"
+            className="text-2xl tracking-widest font-bold flex gap-2 "
+          >
+            <Image
+              src="/favicon.ico"
+              height={30}
+              width={30}
+              alt="Next.js Logo"
+            />{" "}
             FlowScan
           </Link>
         </div>

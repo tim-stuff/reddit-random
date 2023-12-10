@@ -35,12 +35,6 @@ export function indentifySearchInputType(input: string) {
     return "hash";
   }
 
-  // Check if the input matches an ERC-20 token address pattern (example pattern)
-  const tokenPattern = /^(0x)?[0-9a-fA-F]{40}$/;
-  if (tokenPattern.test(input)) {
-    return "token";
-  }
-
   return null;
 }
 

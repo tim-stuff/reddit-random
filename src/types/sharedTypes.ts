@@ -14,3 +14,9 @@ export type Transaction = {
   from: string;
   method: string;
 };
+
+export type TokenDetails = {
+  status: string;
+  message: string;
+  result: string;
+};

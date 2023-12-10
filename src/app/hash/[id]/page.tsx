@@ -1,5 +1,6 @@
 "use client";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
+import StatusIndicator from "@/components/StatusIndicator/StatusIndicator";
 import { HashDetails } from "@/types/sharedTypes";
 import { getHashDetials } from "@/utils/services/getHashDetails";
 import { useParams, useRouter } from "next/navigation";
@@ -23,20 +24,6 @@ const HashDetails = () => {
     }
     getDetails();
   }, []);
-
-  const StatusIndicator = ({ status }: { status: string }) => {
-    const isSuccess = status === "1";
-
-    return (
-      <span
-        className={`text-sm font-semibold ${
-          isSuccess ? "text-green-500" : "text-red-500"
-        }`}
-      >
-        {isSuccess ? " Success" : " Failure"}
-      </span>
-    );
-  };
 
   if (!hashDetails) return null;
 

@@ -3,7 +3,7 @@
 import { indentifySearchInputType } from "@/utils/HelperFunctions/HelperFunctions";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 type Props = {
   header?: boolean;
@@ -22,15 +22,33 @@ const SearchBar = ({ header = false }: Props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
   const pathName = usePathname();
+  const options = ["All Filters", "Token", "Address", "Hash"];
+  const [selectValue, setSelectValue] = useState(options[0]);
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const type = indentifySearchInputType(searchInput);
-    if (!type) {
+    if (!searchInput.length) {
       setErrorMsg("Please enter a valid input.");
       return;
     }
-    router.push(`/${type}/${encodeURIComponent(searchInput)}`);
+    e.preventDefault();
+    switch (selectValue) {
+      case "Address":
+        router.push(`/address/${encodeURIComponent(searchInput)}`);
+        break;
+      case "Hash":
+        router.push(`/hash/${encodeURIComponent(searchInput)}`);
+        break;
+      case "Token":
+        router.push(`/token/${encodeURIComponent(searchInput)}`);
+        break;
+      default:
+        const type = indentifySearchInputType(searchInput);
+        if (!type) {
+          setErrorMsg("Please enter a valid input.");
+          return;
+        }
+        router.push(`/${type}/${encodeURIComponent(searchInput)}`);
+    }
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -45,22 +63,42 @@ const SearchBar = ({ header = false }: Props) => {
         header && pathName === "/" && "hidden"
       }`}
     >
-      <label
-        htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-      >
-        Search
-      </label>
       <div
         className={`${
           header && "border-0 py-1"
-        } flex gap-2 border-2 p-2 rounded-md`}
+        } flex gap-2 border-2 p-2 rounded-md align-middle`}
       >
+        <label
+          className="mb-2 text-sm font-bold hidden"
+          aria-label="Filter"
+          htmlFor="select"
+        >
+          Filter
+        </label>
+        <select
+          id="select"
+          className="border border-purple-100 bg-white rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
+          value={selectValue}
+          onChange={(e) => setSelectValue(e.target.value)}
+        >
+          {options.map((option) => (
+            <option key={option} value={option} className="text-sm">
+              {option}
+            </option>
+          ))}
+        </select>
+        <label
+          htmlFor="default-search"
+          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        >
+          Search
+        </label>
+
         <input
           type="search"
           id="default-search"
           className="p-2  text-sm text-gray-900 rounded-lg focus:outline-none focus:border-2-purple w-full"
-          placeholder="Search for a particular address, transaction hash or token"
+          placeholder="Search for a address, transaction hash or token"
           value={searchInput}
           onChange={handleInputChange}
           required
@@ -68,7 +106,7 @@ const SearchBar = ({ header = false }: Props) => {
         <button
           type="submit"
           aria-label="Search"
-          className="text-white p-1 h-fit  bg-purple-500 hover:bg-purple-600  font-medium rounded-lg text-sm  "
+          className="text-white self-center p-1 h-fit  bg-purple-500 hover:bg-purple-600  font-medium rounded-lg text-sm  "
         >
           <Image src="/search.svg" width={30} height={30} alt="Search-icon" />
         </button>
