@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Stable Assignment - Ethereum Block Explorer Frontend
 
-## Getting Started
+Stable Assignment is a frontend implementation of an Ethereum block explorer, providing users with essential information about addresses, transactions, and ERC-20 tokens. It includes key features such as ether and gas prices, a search bar, and a wallet connection option.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Header
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Displays ether price and gas price in gwei.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Search Bar
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Search for a particular address, transaction hash, or token.
 
-## Learn More
+### Address Details
 
-To learn more about Next.js, take a look at the following resources:
+- View the ether balance of a specific address.
+- List normal transactions with pagination.
+- Display a list of ERC-20 token transfers with pagination.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Token Details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Show total supply of a token.
+- Display the balance of a particular account for the token.
 
-## Deploy on Vercel
+### Wallet Connection
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Connect your wallet (not restricted to MetaMask).
+- Access a profile dashboard with ether balance, list of normal transactions, and ERC-20 token details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Technologies Used
+
+- ReactJS
+- Next.js
+- Tailwindcss
+- Web3Modal
+- Wagmi
+- Axios
+- Etherscan API
+
+## How to Run Locally
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/kror-shack/stable-assignment.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd stable-assignment
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a .env.local file in the root of the project with the following variables and add your keys:
+
+   ```bash
+   ETHERSCAN_API:
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:
+   ```
+
+5. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open your browser and visit http://localhost:3000 to view the application.
