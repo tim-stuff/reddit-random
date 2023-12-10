@@ -1,33 +1,23 @@
 "use client";
 
-import AddressNormalTransaction from "@/components/AddressNormalTransactions/AddressNormalTransactions";
-import AddressTokenTransfers from "@/components/AddressTokenTransfers/AddressTokenTransfers";
-import Pagination from "@/components/Pagination/Pagination";
-import { AddressBalance } from "@/types/sharedTypes";
-import { getAddressBalance } from "@/utils/services/getAddressDetails";
+import { AddressBalance, Transaction } from "@/types/sharedTypes";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { NormalTransaction, TokenTransfer } from "@/types/sharedTypes";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
+import AddressDetails from "@/components/AddressDetails/AddressDetails";
+import { getAddressBalance } from "@/utils/services/getAddressDetails";
 
 /**
  * Renders the address details including address balance, token transfers, and normal transactions.
  * @component
  * @returns A component representing the address details
  */
-const AddressDetails = ({ id }: { id?: string }) => {
-  const [data, setData] = useState<NormalTransaction[] | TokenTransfer[]>([]);
-  const [pageNumber, setPageNumber] = useState(1);
+const AddressPage = () => {
   const params = useParams();
   const [addressBalance, setAddressBalance] = useState<AddressBalance | null>(
     null
   );
-  const [index, setIndex] = useState(0);
-  const addressId = id
-    ? id
-    : typeof params.id === "string"
-    ? params.id
-    : params.id[0];
+  const addressId = typeof params.id === "string" ? params.id : params.id[0];
 
   useEffect(() => {
     async function getDetails() {
@@ -52,37 +42,9 @@ const AddressDetails = ({ id }: { id?: string }) => {
           <div>{` Current address balance : ${addressBalance} wei`}</div>
         )}
       </div>
-      <div>
-        <div className="flex border-b py-4 text-blue-500">
-          <button
-            onClick={() => setIndex(0)}
-            className={`bg-white inline-blockrounded-t py-2 px-4  font-semibold ${
-              index === 0 && " border-t border-r border-l text-blue-700 "
-            } `}
-          >
-            Normal Transactions
-          </button>
-          <button
-            onClick={() => setIndex(1)}
-            className={`bg-white inline-blockrounded-t py-2 px-4  font-semibold ${
-              index !== 0 && " border-t border-r border-l text-blue-700"
-            } `}
-          >
-            Token Transfers
-          </button>
-        </div>
-        {index === 0 ? (
-          <Pagination key="normal" addressId={addressId}>
-            {AddressNormalTransaction}
-          </Pagination>
-        ) : (
-          <Pagination key="token" addressId={addressId}>
-            {AddressTokenTransfers}
-          </Pagination>
-        )}
-      </div>
+      <AddressDetails addressId={addressId} />
     </>
   );
 };
 
-export default AddressDetails;
+export default AddressPage;

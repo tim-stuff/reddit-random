@@ -6,10 +6,10 @@ import {
   useEnsAvatar,
   useEnsName,
 } from "wagmi";
-import AddressDetails from "../address/[id]/page";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Avatar from "@/components/Avatar/Avatar";
+import AddressDetails from "@/components/AddressDetails/AddressDetails";
 
 /**
  * Renders a profile page
@@ -56,7 +56,7 @@ const Profile = () => {
         <div className="font-semibold text-md border-t-2 border-b-2 text-center p-4 my-4">
           Connected to {connector.name}
         </div>
-        <AddressDetails id={address} />
+        {address && <AddressDetails addressId={address} />}
       </div>
     );
   }
