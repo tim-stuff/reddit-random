@@ -28,7 +28,7 @@ export async function getAddressBalance(
       },
     });
 
-    if (response.data.status === "1") {
+    if (response.data) {
       const { status, result } = response.data;
 
       return result; //result is in wei
@@ -70,9 +70,8 @@ export async function getNormalTransactions(
       },
     });
 
-    if (response.data.status === "1") {
+    if (response.data) {
       const { result } = response.data;
-      console.log("🚀 ~ file: getAddressDetails.ts:74 ~ result:", result);
       const mappedResult = result.map((transaction: NormalTransaction) => ({
         hash: transaction.hash,
         to: transaction.to,

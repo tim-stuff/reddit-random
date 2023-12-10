@@ -21,7 +21,7 @@ export default async function getEtherLastPrice(): Promise<EtherPrice | null> {
       },
     });
 
-    if (response.data.status === "1") {
+    if (response.data) {
       const { ethusd, ethusd_timestamp } = response.data.result;
 
       return {

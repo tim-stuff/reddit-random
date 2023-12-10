@@ -10,11 +10,6 @@ import axios from "axios";
  */
 export async function getHashDetials(id: string): Promise<HashDetails | null> {
   try {
-    return {
-      status: "1",
-      error: "0",
-      errorMessage: "",
-    };
     const response = await axios.get("https://api.etherscan.io/api", {
       params: {
         module: "transaction",
@@ -24,7 +19,7 @@ export async function getHashDetials(id: string): Promise<HashDetails | null> {
       },
     });
 
-    if (response.data.status === "1") {
+    if (response.data) {
       const { status, result } = response.data;
 
       return {

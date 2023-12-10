@@ -20,7 +20,7 @@ export default async function getGasPrice(): Promise<null | GasPrice> {
       },
     });
 
-    if (response.data.status === "1") {
+    if (response.data) {
       // TODO: check whether the suggest base fee === base fee
       const { FastGasPrice, suggestBaseFee } = response.data.result;
 
