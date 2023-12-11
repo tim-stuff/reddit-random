@@ -1,10 +1,6 @@
 "use server";
 
-import {
-  AddressBalance,
-  NormalTransaction,
-  TokenTransfer,
-} from "@/types/sharedTypes";
+import { AddressBalance, Transaction } from "@/types/sharedTypes";
 import axios from "axios";
 import { getTimeAgo } from "../HelperFunctions/HelperFunctions";
 
@@ -46,7 +42,7 @@ export async function getAddressBalance(
  * Retrieves a list of normal (Ether) transactions for a given Ethereum address.
  *
  * @param  id - The Ethereum address for which to retrieve transactions.
- * @param } page - The page number for paginated results.
+ * @param  page - The page number for paginated results.
  * @param startBlock - The starting block number for fetching transactions.
  * @returns  A Promise that resolves to an array of normal transactions or null if an error occurs.
  */
@@ -54,7 +50,7 @@ export async function getNormalTransactions(
   id: string,
   page: number,
   startBlock: number
-): Promise<NormalTransaction[] | null> {
+): Promise<Transaction[] | null> {
   try {
     const response = await axios.get("https://api.etherscan.io/api", {
       params: {
@@ -72,13 +68,13 @@ export async function getNormalTransactions(
 
     if (response.data) {
       const { result } = response.data;
-      const mappedResult = result.map((transaction: NormalTransaction) => ({
+      const mappedResult = result.map((transaction: Transaction) => ({
         hash: transaction.hash,
         to: transaction.to,
         value: transaction.value,
         timeStamp: getTimeAgo(transaction.timeStamp),
         from: transaction.from,
-        method: transaction.functionName,
+        blockNumber: transaction.blockNumber,
       }));
 
       return mappedResult;
@@ -104,7 +100,7 @@ export async function getTokenTransfers(
   id: string,
   page: number,
   startBlock: number
-): Promise<TokenTransfer[] | null> {
+): Promise<Transaction[] | null> {
   try {
     const response = await axios.get("https://api.etherscan.io/api", {
       params: {
@@ -122,13 +118,13 @@ export async function getTokenTransfers(
 
     if (response.data.status === "1") {
       const { result } = response.data;
-      const mappedResult = result.map((transaction: TokenTransfer) => ({
+      const mappedResult = result.map((transaction: Transaction) => ({
         hash: transaction.hash,
         to: transaction.to,
         value: transaction.value,
         timeStamp: getTimeAgo(transaction.timeStamp),
         from: transaction.from,
-        functionName: transaction.method,
+        blockNumber: transaction.blockNumber,
       }));
 
       return mappedResult;

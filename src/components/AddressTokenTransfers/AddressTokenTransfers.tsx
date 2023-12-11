@@ -28,10 +28,12 @@ const AddressTokenTransfers = ({
   pageNumber,
 }: Props) => {
   const firstRender = useRef(true);
+  const [loading, setLoading] = useState(true);
 
   async function getDetails() {
     const startBlock = data && data.length ? data.length : 0;
     const details = await getTokenTransfers(addressId, pageNumber, startBlock);
+    setLoading(false);
     if (details)
       setData((prev) => {
         return [...prev, ...details];
@@ -43,11 +45,23 @@ const AddressTokenTransfers = ({
       firstRender.current = false;
       getDetails();
     } else if (data.length && pageNumber > data.length / 20) {
+      setLoading(true);
       getDetails();
     }
   }, [pageNumber, addressId]);
 
-  if (!data) return null;
+  if (loading)
+    return (
+      <div className="text-center w-full text-blue-700  p-4 text-md">
+        Fetching...
+      </div>
+    );
+  if (data.length === 0)
+    return (
+      <div className="text-center w-full text-red-400  p-4 text-md">
+        No data found
+      </div>
+    );
 
   return <TransactionTable data={data} pageNumber={pageNumber} />;
 };

@@ -12,7 +12,7 @@ export type Transaction = {
   value: string;
   timeStamp: string;
   from: string;
-  method: string;
+  blockNumber: string;
 };
 
 export type TokenDetails = {

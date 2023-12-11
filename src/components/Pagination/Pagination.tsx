@@ -1,4 +1,4 @@
-import { NormalTransaction, TokenTransfer } from "@/types/sharedTypes";
+import { Transaction } from "@/types/sharedTypes";
 import React, { Children, ReactNode, cloneElement, useState } from "react";
 
 type Props = { children: any; addressId: string };
@@ -12,7 +12,7 @@ type Props = { children: any; addressId: string };
  * @returns
  */
 const Pagination = ({ children, addressId }: Props) => {
-  const [data, setData] = useState<NormalTransaction[] | TokenTransfer[]>([]);
+  const [data, setData] = useState<Transaction[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
 
   const ChildComponent = children;
@@ -26,8 +26,8 @@ const Pagination = ({ children, addressId }: Props) => {
         setData={setData}
         pageNumber={pageNumber}
       />
-      <div className="flex flex-col align-middle justify-center w-full m-5">
-        <div className="flex gap-4 m-4 justify-center">
+      <div className="flex flex-col align-middle justify-center w-full my-5">
+        <div className="flex gap-4 my-4 justify-center">
           <button
             className="border border-purple-500 text-purple-500 px-4 py-2 rounded focus:outline-none"
             onClick={() => setPageNumber((prev) => prev - 1)}
@@ -48,7 +48,7 @@ const Pagination = ({ children, addressId }: Props) => {
             Next
           </button>
         </div>
-        <p className=" text-md text-center">{`Page:  ${pageNumber}`}</p>
+        <p className=" text-md text-center mb-5">{`Page  ${pageNumber}`}</p>
       </div>
     </>
   );

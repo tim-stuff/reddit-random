@@ -26,11 +26,13 @@ const TransactionTable = ({ data, pageNumber }: Props) => {
     return (
       <>
         {href ? (
-          <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blue-500 hover:text-blue-700 cursor-pointer ">
-            <Link href={href}>{text}</Link>
+          <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs w-full py-4 -hidden  text-ellipsis text-blue-500 hover:text-blue-700">
+            <Link className=" " href={href}>
+              {text}
+            </Link>
           </td>
         ) : (
-          <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-blue-500 hover:text-blue-700 cursor-pointer ">
+          <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 max-w-fit text-center">
             {text}
           </td>
         )}
@@ -39,27 +41,31 @@ const TransactionTable = ({ data, pageNumber }: Props) => {
   };
 
   return (
-    <div className="overflow-x-auto p-4">
-      <table className="min-w-full border border-collapse text-sm  items-center bg-transparent ">
+    <div className="overflow-x-auto p-4 ">
+      <table className=" max-w-7xl min-w-full border border-collapse text-sm  items-center bg-transparent ">
         <thead>
           <tr>
             <TableHeader heading="Transaction Hash" />
+            <TableHeader heading=" Block Number" />
             <TableHeader heading="To" />
             <TableHeader heading="Value in Wei" />
             <TableHeader heading="Age" />
-            <TableHeader heading=" Age" />
-            <TableHeader heading=" Function Name" />
+            <TableHeader heading=" From" />
           </tr>
         </thead>
         <tbody>
           {data
             .slice((pageNumber - 1) * 20, (pageNumber - 1) * 20 + 20)
             .map((transaction, index) => (
-              <tr key={index} className={`${index % 2 == 0 && "bg-gray-100 "}`}>
+              <tr
+                key={index}
+                className={`${index % 2 == 0 ? "bg-gray-100 " : ""}`}
+              >
                 <TableCell
                   text={transaction.hash}
                   href={`/hash/${encodeURIComponent(transaction.hash)}`}
                 />
+                <TableCell text={transaction.blockNumber} />
                 <TableCell
                   text={transaction.to}
                   href={`/address/${encodeURIComponent(transaction.to)}`}
@@ -70,7 +76,6 @@ const TransactionTable = ({ data, pageNumber }: Props) => {
                   text={transaction.from}
                   href={`/address/${encodeURIComponent(transaction.from)}`}
                 />
-                <TableCell text={transaction.method} />
               </tr>
             ))}
         </tbody>
