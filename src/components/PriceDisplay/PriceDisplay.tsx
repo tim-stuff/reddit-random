@@ -45,7 +45,7 @@ const PriceDisplay = async () => {
       {ethPrice && (
         <PriceComponent
           text="ETH Price: "
-          subText={`$${ethPrice.ethusd}`}
+          subText={`$${ethPrice.ethusd.toLocaleString()}`}
           hoverText={`Last updated: ${ethPrice.updatedAt}`}
         />
       )}

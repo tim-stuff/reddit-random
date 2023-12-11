@@ -66,7 +66,7 @@ const SearchBar = ({ header = false }: Props) => {
       <div
         className={`${
           header && "border-0 py-1"
-        } flex gap-2 border-2 p-2 rounded-md align-middle`}
+        } flex  gap-2  border-2 p-2 rounded-md align-middle`}
       >
         <label
           className="mb-2 text-sm font-bold hidden"
@@ -77,12 +77,12 @@ const SearchBar = ({ header = false }: Props) => {
         </label>
         <select
           id="select"
-          className="border border-purple-100 bg-white rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
+          className="border border-purple-100  bg-white rounded-md p-auto  focus:outline-none focus:border-purple-50 "
           value={selectValue}
           onChange={(e) => setSelectValue(e.target.value)}
         >
           {options.map((option) => (
-            <option key={option} value={option} className="text-sm">
+            <option key={option} value={option} className="text-sm py-2">
               {option}
             </option>
           ))}

@@ -29,7 +29,7 @@ const AddressPage = () => {
 
   return (
     <>
-      <div className="p-4 border rounded-md shadow-md w-fit">
+      <div className="p-4 border rounded-md shadow-md w-fit pb-8">
         <h2 className="text-lg font-semibold mb-2 ">Address Details</h2>
 
         <div className="flex gap-4 ">

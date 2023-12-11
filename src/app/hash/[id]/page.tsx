@@ -28,7 +28,7 @@ const HashDetails = () => {
   if (!hashDetails) return null;
 
   return (
-    <div className="p-4 pt-0 ">
+    <div className="p-4 pt-0 mb-4">
       <h2 className="text-lg font-semibold mb-2">Transaction Details</h2>
       <div className="border rounded-md shadow-md p-4 flex-col flex gap-4 w-fit">
         <div className="flex gap-4">

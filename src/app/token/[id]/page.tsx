@@ -54,7 +54,7 @@ const TokenDetails = () => {
   if (!tokenDetails) return null;
 
   return (
-    <div className="p-4 pt-0 ">
+    <div className="p-4 pt-0 mb-4 ">
       <h2 className="text-xl font-semibold mb-2">Token Details</h2>
       <form onSubmit={handleSubmit} className={`md:w-full max-w-3xl my-2  `}>
         <label

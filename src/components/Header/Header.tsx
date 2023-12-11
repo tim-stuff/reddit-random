@@ -22,7 +22,7 @@ const Header = () => {
         <div>
           <Link
             href="/"
-            className="text-2xl tracking-widest font-bold flex gap-2 "
+            className="text-2xl tracking-widest font-bold flex gap-2 text-black "
           >
             <Image
               src="/favicon.ico"

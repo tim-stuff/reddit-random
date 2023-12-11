@@ -20,7 +20,7 @@ const CopyBtn = ({ hashId }: Props) => {
 
   return (
     <button
-      className="cursor-pointer text-xs border-purple-200 border p-1 h-fit"
+      className="cursor-pointer text-xs border-purple-200 border p-1 h-fit flex-shrink-0"
       aria-label="Copy hash"
       onClick={handleCopyClick}
     >
