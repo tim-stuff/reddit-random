@@ -25,10 +25,6 @@ const ConnectWalletBtn = ({ className }: Props) => {
   const router = useRouter();
   const { disconnect } = useDisconnect();
 
-  useEffect(() => {
-    if (isConnected) router.push("/profile-dashboard");
-  }, [isConnected]);
-
   return (
     <>
       {isConnected ? (

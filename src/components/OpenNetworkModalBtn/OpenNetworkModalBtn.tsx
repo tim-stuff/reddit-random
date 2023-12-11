@@ -25,17 +25,26 @@ const OpenNetworkModelBtn = () => {
   const router = useRouter();
   const { disconnect } = useDisconnect();
 
-  useEffect(() => {
-    if (isConnected) router.push("/profile-dashboard");
-  }, [isConnected]);
-
   return (
-    <button
-      onClick={() => open({ view: "Networks" })}
-      className="border-purple-400 hover:bg-gray-100 shadow font-bold py-2 px-4 rounded"
-    >
-      Open Network Modals
-    </button>
+    <>
+      {isConnected ? (
+        <button
+          onClick={() => {
+            router.push("/profile-dashboard");
+          }}
+          className="border-purple-400 text-black hover:bg-gray-100 shadow font-bold py-2 px-4 rounded w-fit"
+        >
+          Profile Dashboard
+        </button>
+      ) : (
+        <button
+          onClick={() => open({ view: "Networks" })}
+          className="border-purple-400 text-black hover:bg-gray-100 shadow font-bold py-2 px-4 rounded w-fit"
+        >
+          Open Network Modals
+        </button>
+      )}
+    </>
   );
 };
 export default OpenNetworkModelBtn;
