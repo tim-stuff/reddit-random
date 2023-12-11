@@ -1,11 +1,5 @@
 "use client";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-} from "wagmi";
+import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Avatar from "@/components/Avatar/Avatar";
@@ -21,14 +15,13 @@ const Profile = () => {
   const { address, connector, isConnected } = useAccount();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({ name: ensName });
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
+
   const { disconnect } = useDisconnect();
   const router = useRouter();
 
   useEffect(() => {
     if (!isConnected) router.push("/");
-  }, [isConnected]);
+  }, [isConnected, router]);
 
   if (isConnected && connector) {
     return (

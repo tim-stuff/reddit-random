@@ -2,18 +2,7 @@
 
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-} from "wagmi";
-
-type Props = {
-  className?: string;
-};
+import { useAccount } from "wagmi";
 
 /**
  * Renders a custom button with wagmi hooks to open network model
@@ -23,7 +12,6 @@ const OpenNetworkModelBtn = () => {
   const { open } = useWeb3Modal();
   const { address, connector, isConnected } = useAccount();
   const router = useRouter();
-  const { disconnect } = useDisconnect();
 
   return (
     <>

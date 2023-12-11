@@ -1,6 +1,6 @@
 "use client";
 
-import { AddressBalance, Transaction } from "@/types/sharedTypes";
+import { AddressBalance } from "@/types/sharedTypes";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
@@ -25,7 +25,7 @@ const AddressPage = () => {
       if (details) setAddressBalance(details);
     }
     getDetails();
-  }, []);
+  }, [addressId]);
 
   return (
     <>

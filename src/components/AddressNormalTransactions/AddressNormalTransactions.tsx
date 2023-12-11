@@ -1,6 +1,5 @@
 import { Transaction } from "@/types/sharedTypes";
 import { getNormalTransactions } from "@/utils/services/getAddressDetails";
-import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import TransactionTable from "../TransactionTable/TansactionTable";
 
@@ -30,20 +29,19 @@ const AddressNormalTransaction = ({
   const firstRender = useRef(true);
   const [loading, setLoading] = useState(true);
 
-  async function getDetails() {
-    const startBlock = data && data.length ? data.length : 0;
-
-    const details = await getNormalTransactions(
-      addressId,
-      pageNumber,
-      startBlock
-    );
-
-    setLoading(false);
-    if (details) setData((prev) => [...prev, ...details]);
-  }
-
   useEffect(() => {
+    async function getDetails() {
+      const startBlock = data && data.length ? data.length : 0;
+
+      const details = await getNormalTransactions(
+        addressId,
+        pageNumber,
+        startBlock
+      );
+
+      setLoading(false);
+      if (details) setData((prev) => [...prev, ...details]);
+    }
     if (firstRender.current) {
       firstRender.current = false;
       getDetails();
@@ -51,7 +49,7 @@ const AddressNormalTransaction = ({
       setLoading(true);
       getDetails();
     }
-  }, [pageNumber, addressId]);
+  }, [pageNumber, addressId, data, setData]);
 
   if (loading)
     return (

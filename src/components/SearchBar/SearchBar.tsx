@@ -3,7 +3,7 @@
 import { indentifySearchInputType } from "@/utils/HelperFunctions/HelperFunctions";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   header?: boolean;

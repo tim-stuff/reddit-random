@@ -1,5 +1,4 @@
-import { getAddressBalance } from "@/utils/services/getAddressDetails";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Pagination from "../Pagination/Pagination";
 import AddressNormalTransaction from "../AddressNormalTransactions/AddressNormalTransactions";
 import AddressTokenTransfers from "../AddressTokenTransfers/AddressTokenTransfers";

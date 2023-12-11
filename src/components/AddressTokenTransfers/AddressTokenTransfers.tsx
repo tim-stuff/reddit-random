@@ -1,6 +1,5 @@
 import { Transaction } from "@/types/sharedTypes";
 import { getTokenTransfers } from "@/utils/services/getAddressDetails";
-import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import TransactionTable from "../TransactionTable/TansactionTable";
 
@@ -30,17 +29,20 @@ const AddressTokenTransfers = ({
   const firstRender = useRef(true);
   const [loading, setLoading] = useState(true);
 
-  async function getDetails() {
-    const startBlock = data && data.length ? data.length : 0;
-    const details = await getTokenTransfers(addressId, pageNumber, startBlock);
-    setLoading(false);
-    if (details)
-      setData((prev) => {
-        return [...prev, ...details];
-      });
-  }
-
   useEffect(() => {
+    async function getDetails() {
+      const startBlock = data && data.length ? data.length : 0;
+      const details = await getTokenTransfers(
+        addressId,
+        pageNumber,
+        startBlock
+      );
+      setLoading(false);
+      if (details)
+        setData((prev) => {
+          return [...prev, ...details];
+        });
+    }
     if (firstRender.current) {
       firstRender.current = false;
       getDetails();
@@ -48,7 +50,7 @@ const AddressTokenTransfers = ({
       setLoading(true);
       getDetails();
     }
-  }, [pageNumber, addressId]);
+  }, [pageNumber, addressId, data, setData]);
 
   if (loading)
     return (

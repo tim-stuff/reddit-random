@@ -1,6 +1,5 @@
 import { Transaction } from "@/types/sharedTypes";
 import Link from "next/link";
-import { ReactNode } from "react";
 
 type Props = {
   data: Transaction[];
@@ -12,7 +11,14 @@ interface TableCellProps {
   href?: string;
   className?: string;
 }
-
+/**
+ * Renders a HMTL table
+ *
+ * @component
+ * @param data - The Transaction data to be displayed
+ * @param pageNumber - The page number to be displayed
+ * @returns The props data in the form of html table
+ */
 const TransactionTable = ({ data, pageNumber }: Props) => {
   const TableHeader = ({ heading }: { heading: string }) => {
     return (

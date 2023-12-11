@@ -6,6 +6,14 @@ type Props = {
   name?: string | null;
 };
 
+/**
+ * Renders a user avatar
+ *
+ * @component
+ * @param src - Path to the user image
+ * @name - The username
+ * @returns A image, default if not provided, and user name, user if not provided.
+ */
 const Avatar = ({ src, name }: Props) => {
   return (
     <>

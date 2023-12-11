@@ -1,5 +1,4 @@
 import SearchBar from "@/components/SearchBar/SearchBar";
-import Header from "../components/Header/Header";
 import Image from "next/image";
 import ConnectWalletBtn from "@/components/ConnectWalletBtn/ConnectWalletBtn";
 import OpenNetworkModelBtn from "@/components/OpenNetworkModalBtn/OpenNetworkModalBtn";

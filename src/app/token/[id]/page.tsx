@@ -6,7 +6,7 @@ import {
   getTokenBalanceForAccount,
   getTokenDetails,
 } from "@/utils/services/getTokenDetails";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
@@ -29,7 +29,7 @@ const TokenDetails = () => {
       if (details) setTokenDetails(details);
     }
     getDetails();
-  }, []);
+  }, [hashId]);
 
   async function getBalance() {
     const details = await getTokenBalanceForAccount(hashId, searchInput);
@@ -68,7 +68,7 @@ const TokenDetails = () => {
           type="search"
           id="default-search"
           className="p-2  text-sm text-gray-900 rounded-lg focus:outline-none border border-purple-200 max-w-xl w-full focus:border-2-purple my-2 mr-2"
-          placeholder="Search  account balance for this token"
+          placeholder="Search account balance for this token"
           value={searchInput}
           onChange={handleInputChange}
           required

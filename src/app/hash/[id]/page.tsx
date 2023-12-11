@@ -3,7 +3,7 @@ import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import StatusIndicator from "@/components/StatusIndicator/StatusIndicator";
 import { HashDetails } from "@/types/sharedTypes";
 import { getHashDetials } from "@/utils/services/getHashDetails";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
@@ -23,7 +23,7 @@ const HashDetails = () => {
       if (details) setHashDetails(details);
     }
     getDetails();
-  }, []);
+  }, [hashId]);
 
   if (!hashDetails) return null;
 

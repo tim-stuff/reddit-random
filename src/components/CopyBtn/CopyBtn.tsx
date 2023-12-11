@@ -5,6 +5,13 @@ type Props = {
   hashId: string;
 };
 
+/**
+ * Renders a copy button
+ *
+ * @component
+ * @param hashId: the id to be copied
+ * @returns A copy button with condtional copy or tick svg.
+ */
 const CopyBtn = ({ hashId }: Props) => {
   const [copied, setCopied] = useState(false);
 

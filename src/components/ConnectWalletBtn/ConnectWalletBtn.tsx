@@ -1,15 +1,7 @@
 "use client";
 
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-} from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 
 type Props = {
   className?: string;
@@ -22,7 +14,6 @@ type Props = {
 const ConnectWalletBtn = ({ className }: Props) => {
   const { open } = useWeb3Modal();
   const { address, connector, isConnected } = useAccount();
-  const router = useRouter();
   const { disconnect } = useDisconnect();
 
   return (
